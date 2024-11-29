@@ -98,9 +98,9 @@
     </div>
   </main>
 
-  <section class="new-price container p-2 d-flex justify-content-between align-items-center">
+  <section class="new-price container p-2 flex-wrap d-flex ">
     <h2 class="subtittle">Новая коллекция</h2>
-    <div class="new-price__cards">
+    <div class="new-price__cards d-flex">
       <div id="productList"></div>
     </div>
     <button class="btn-more ">Загрузить ещё!</button>
@@ -112,6 +112,24 @@
       <button type="submit">Добавить товар</button>
     </form>
   </section>
+
+<section class="container p-2 d-flex justify-content-between align-items-center">
+  <button class="nav-btn nav-btn--e " type="submit">
+    electronics
+  </button>
+  <button class="nav-btn nav-btn--j" type="submit">
+    jewelery
+  </button>
+  <button class="nav-btn nav-btn--m" type="submit">
+    men's clothing
+  </button>
+  <button class="nav-btn nav-btn--w" type="submit">
+    women's clothing
+  </button>
+  <button class="nav-btn nav-btn--a" type="submit">
+    all categories
+  </button>
+</section>
 
 
   <footer class="footer mb-2">
@@ -155,6 +173,7 @@
     </div>
   </footer>
   <script src="./scripts.js"></script>
+  <!-- <script src="./app.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>

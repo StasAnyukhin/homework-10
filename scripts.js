@@ -2,7 +2,15 @@ const productList = document.getElementById("productList");
 const addProductForm = document.getElementById("addProductForm");
 const loudBtn = document.querySelector(".btn-more");
 
+const BtnCat1 = document.querySelector(".nav-btn--e");
+const BtnCat2 = document.querySelector(".nav-btn--j");
+const BtnCat3 = document.querySelector(".nav-btn--m");
+const BtnCat4 = document.querySelector(".nav-btn--w");
+const BtnCat5 = document.querySelector(".nav-btn--a");
+
 let localProducts = [];
+let currentPage = 1;
+const itemsPerPage = 6;
 
 function displayProducts(products) {
   productList.innerHTML = "";
@@ -81,9 +89,12 @@ async function addProduct(event) {
 
 async function deleteProduct(productId) {
   try {
-    const response = await fetch(`https://fakestoreapi.com/products/${productId}`,{
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://fakestoreapi.com/products/${productId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) throw new Error("Ошибка при удалении товара");
 
@@ -97,7 +108,110 @@ async function deleteProduct(productId) {
   }
 }
 
-loudBtn.addEventListener("click", fetchProducts);
-addProductForm.addEventListener("submit", addProduct);
+async function fetchProducts() {
+  try {
+    const response = await fetch(
+      `https://fakestoreapi.com/products?limit=${itemsPerPage}&page=${currentPage}`
+    );
+    if (!response.ok) throw new Error("Ошибка загрузки данных");
+    const products = await response.json();
+
+    localProducts = [...localProducts, ...products];
+    displayProducts(localProducts);
+  } catch (error) {
+    console.error("Ошибка при получении товаров:", error);
+    alert("Не удалось загрузить товары. Пожалуйста, попробуйте позже.");
+  }
+}
+
+loudBtn.addEventListener("click", () => {
+  currentPage++;
+  fetchProducts();
+});
 
 fetchProducts();
+
+// Работа с категориями
+
+async function fetchCat1() {
+  try {
+    const response = await fetch(
+      "https://fakestoreapi.com/products/category/electronics"
+    );
+    if (!response.ok) throw new Error("Ошибка загрузки данных");
+    const products = await response.json();
+    localProducts = products; // Сохраняем в локальную переменную
+    displayProducts(localProducts);
+  } catch (error) {
+    console.error("Ошибка при получении товаров:", error);
+    alert("Не удалось загрузить товары. Пожалуйста, попробуйте позже.");
+  }
+}
+
+BtnCat1.addEventListener("click", fetchCat1);
+
+async function fetchCat2() {
+  try {
+    const response = await fetch(
+      "https://fakestoreapi.com/products/category/jewelery"
+    );
+    if (!response.ok) throw new Error("Ошибка загрузки данных");
+    const products = await response.json();
+    localProducts = products; // Сохраняем в локальную переменную
+    displayProducts(localProducts);
+  } catch (error) {
+    console.error("Ошибка при получении товаров:", error);
+    alert("Не удалось загрузить товары. Пожалуйста, попробуйте позже.");
+  }
+}
+
+BtnCat2.addEventListener("click", fetchCat2);
+
+async function fetchCat3() {
+  try {
+    const response = await fetch(
+      "https://fakestoreapi.com/products/category/men's clothing"
+    );
+    if (!response.ok) throw new Error("Ошибка загрузки данных");
+    const products = await response.json();
+    localProducts = products; // Сохраняем в локальную переменную
+    displayProducts(localProducts);
+  } catch (error) {
+    console.error("Ошибка при получении товаров:", error);
+    alert("Не удалось загрузить товары. Пожалуйста, попробуйте позже.");
+  }
+}
+
+BtnCat3.addEventListener("click", fetchCat3);
+
+async function fetchCat4() {
+  try {
+    const response = await fetch(
+      "https://fakestoreapi.com/products/category/women's clothing"
+    );
+    if (!response.ok) throw new Error("Ошибка загрузки данных");
+    const products = await response.json();
+    localProducts = products; // Сохраняем в локальную переменную
+    displayProducts(localProducts);
+  } catch (error) {
+    console.error("Ошибка при получении товаров:", error);
+    alert("Не удалось загрузить товары. Пожалуйста, попробуйте позже.");
+  }
+}
+
+BtnCat4.addEventListener("click", fetchCat4);
+
+async function fetchCat5() {
+  try {
+    const response = await fetch("https://fakestoreapi.com/products");
+    if (!response.ok) throw new Error("Ошибка загрузки данных");
+    const products = await response.json();
+    localProducts = products; // Сохраняем в локальную переменную
+    displayProducts(localProducts);
+  } catch (error) {
+    console.error("Ошибка при получении товаров:", error);
+    alert("Не удалось загрузить товары. Пожалуйста, попробуйте позже.");
+  }
+}
+
+BtnCat5.addEventListener("click", fetchCat5);
